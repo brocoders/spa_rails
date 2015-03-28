@@ -1,0 +1,14 @@
+doctype html
+html(lang='en' data-ng-app='app')
+  head
+    base(href="/")
+    meta(charset='utf-8')
+    title App name
+    meta(name='description' content='App description')
+    meta(charset='utf-8')
+    = stylesheet_link_tag 'manifests/application'
+
+  body
+
+    #app.app(ui-view='')
+    = javascript_include_tag 'manifests/application'
