@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slim", "~> 3.0.3"
   spec.add_dependency "sass-rails"
   spec.add_dependency "uglifier"
+  spec.add_dependency "ngannotate-rails"
   spec.add_dependency "sprockets-rails"
 end
