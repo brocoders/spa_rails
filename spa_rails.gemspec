@@ -26,5 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_dependency "slim", "~> 3.0.3"
   spec.add_dependency "sass-rails"
+  spec.add_dependency "uglifier"
   spec.add_dependency "sprockets-rails"
 end
