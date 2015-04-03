@@ -1,3 +1,5 @@
+require "sass-rails"
+require "uglifier"
 require "spa_rails/version"
 require "spa_rails/routes"
 require "spa_rails/railtie"

@@ -25,6 +25,12 @@ module SpaRails
       end
 
       def add_configs
+        environment do
+          "config.angular_templates.inside_paths << Rails.root.join('frontend')"
+        end
+      end
+
+      def add_dev_configs
         configs = [
             "config.assets.version = '1.0'",
             "config.assets.compile = true",
@@ -33,11 +39,22 @@ module SpaRails
             "config.assets.debug = true"
         ]
 
-        environment do
-          "config.angular_templates.inside_paths << Rails.root.join('frontend')"
-        end
-
         environment(nil, env: "development") do
+          configs.join("\n  ")
+        end
+      end
+
+      def add_prod_config
+        configs = [
+            "config.assets.version = '1.0'",
+            "config.assets.compile = false",
+            "config.assets.digest = true",
+            "config.assets.compress = true",
+            "config.assets.debug = false",
+            "config.assets.js_compressor = :uglifier"
+        ]
+
+        environment(nil, env: "production") do
           configs.join("\n  ")
         end
       end
