@@ -14,5 +14,9 @@ module SpaRails
     end
 
     config.assets.precompile.push(/(?:\/|\\|\A)manifests(?:\/|\\)[^\/]+\.(css|js)$/)
+
+    config.before_configuration do |app|
+      config.ng_annotate.paths = [app.root.to_s]
+    end
   end
 end
