@@ -4,7 +4,6 @@ module ActionDispatch::Routing
       Rails.application.assets.dup.instance_eval do
         @context_class.instance_eval do
           config = Rails.application.config.assets
-          self.debug_assets = config.debug
           self.digest_assets = config.digest
         end
 

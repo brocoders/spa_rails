@@ -29,5 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "execjs", "~> 2.5.2"
   spec.add_dependency "uglifier", "~> 2.7.1"
   spec.add_dependency "ngannotate-rails", "~> 1.0.0"
-  spec.add_dependency "sprockets-rails", "~> 2.3.1"
+  spec.add_dependency "sprockets-rails", "~> 3.0.0"
 end

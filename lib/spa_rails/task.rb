@@ -5,10 +5,12 @@ module SpaRails
         desc "Precompile all pages with .slimpage ext"
         task :precompile_pages => :environment do
           with_logger do
-            paths = index.each_logical_path(/\.htm/).to_a
+            filter = lambda do |filename, path|
+              File.extname(path) == '.slimpage'
+            end
 
-            paths.each do |path|
-              if asset = index.find_asset(path)
+            manifest.find(filter) do |asset|
+              if filter.call(asset.logical_path, asset.filename)
                 target = File.join(File.expand_path(output), asset.logical_path)
 
                 logger.info "Writing #{target}"

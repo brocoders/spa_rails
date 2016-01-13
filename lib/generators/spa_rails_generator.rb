@@ -25,8 +25,13 @@ module SpaRails
       end
 
       def add_configs
+        configs = [
+            "config.angular_templates.inside_paths << Rails.root.join('frontend')",
+            "config.spa_rails.manifest_extensions << '.ngslim'"
+        ]
+
         environment do
-          "config.angular_templates.inside_paths << Rails.root.join('frontend')"
+          configs.join("\n  ")
         end
       end
 
@@ -60,7 +65,7 @@ module SpaRails
       end
 
       def add_dependencies
-        gem 'angular-rails-templates', github: 'sars/angular-rails-templates'
+        gem 'angular-rails4-templates', '~> 0.4.1'
 
         log :gemfile, "rails-assets gems"
 
