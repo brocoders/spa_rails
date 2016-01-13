@@ -2,21 +2,26 @@ require "slim"
 
 module SpaRails
   class Engine < ::Rails::Engine
-    initializer 'spa-rails', group: :all  do |app|
-      Slim::Engine.set_options(attr_list_delims: {'(' => ')', '[' => ']'})
-      app.assets.register_engine('.slimpage', Slim::Template)
-    end
+    config.spa_rails = ActiveSupport::OrderedOptions.new
+    config.spa_rails.manifest_extensions = %w(.js .css .htm .html)
 
     config.assets.paths << find_root('.').join("frontend")
-
-    config.assets.precompile << lambda do |filename, path|
-      path =~ /frontend/ && !%w(.js .css .htm).include?(File.extname(filename))
-    end
 
     config.assets.precompile.push(/(?:\/|\\|\A)manifests(?:\/|\\)[^\/]+\.(css|js)$/)
 
     config.before_configuration do |app|
       config.ng_annotate.paths = [app.root.to_s]
+    end
+
+    config.after_initialize do |app|
+      Slim::Engine.set_options(attr_list_delims: {'(' => ')', '[' => ']'})
+      app.assets.register_engine('.slimpage', Slim::Template)
+
+      if config.spa_rails.manifest_extensions.present?
+        config.assets.precompile << lambda do |filename, path|
+          path =~ /frontend/ && !config.spa_rails.manifest_extensions.include?(File.extname(filename))
+        end
+      end
     end
   end
 end

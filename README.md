@@ -37,3 +37,36 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Critical changes v1.0.0
+
+Install sprockets-rails to version 3.0.0 and newer
+
+If you have previously installed a old version of gem, then you must uninstall this version with e.g.
+
+    $ gem uninstall sprockets-rails
+
+and install needed version
+
+    $ gem install sprockets-rails -v 3.0.0
+
+Check sprockets v3 [critical changes](https://github.com/rails/sprockets-rails#changes-from-rails-3x)
+
+Replace old gem angular-rails-templates by newer 
+
+    $ gem 'angular-rails4-templates', '~> 0.4.1'
+
+And read [install instructions](https://github.com/gaslight/angular-rails4-templates) 
+
+Change all templates extensions 
+For example `.html.slim` to `.ngslim`
+
+```
+$ cd project/directory
+$ find -L . -type f -name "*.html.slim" -print0  | while IFS= read -r -d '' FNAME; do     mv -- "$FNAME" "${FNAME%.html.slim}.ngslim"; done
+```
+
+Exclude `.ngslim` from precompile. Add to `application.rb` config 
+```
+config.spa_rails.manifest_extensions << '.ngslim'
+``` 
