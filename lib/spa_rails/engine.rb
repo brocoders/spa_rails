@@ -13,9 +13,12 @@ module SpaRails
       config.ng_annotate.paths = [app.root.to_s]
     end
 
+    config.assets.configure do |env|
+      env.register_engine('.slimpage', Slim::Template)
+    end
+
     config.after_initialize do |app|
       Slim::Engine.set_options(attr_list_delims: {'(' => ')', '[' => ']'})
-      app.assets.register_engine('.slimpage', Slim::Template)
 
       if config.spa_rails.manifest_extensions.present?
         config.assets.precompile << lambda do |filename, path|
